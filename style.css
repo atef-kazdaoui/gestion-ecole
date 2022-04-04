@@ -1,0 +1,102 @@
+h1{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 50px;
+   }
+   
+.connexion-eleve1{
+
+    background-size:cover ;
+    background-image:url("image/admin.jpg") ;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.connexion-professeur1{
+ background-image: url("image/professeur.jpg");
+ background-repeat: no-repeat;
+ background-size: cover;
+   z-index: 9999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+.connexion-administrateur1{
+    background-image: url("image/professeur.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+      z-index: 9999;
+       width: 100%;
+       height: 100%;
+       position: absolute;
+       top: 0;
+       left: 0;
+ }
+
+#numero-administrateur{
+    height:30px;
+   width: 180px;
+}
+#password{
+    height:30px;
+   width: 180px;
+}
+#button{
+    background-color:brown;
+    border: none;
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#numero-professeur{
+    height:30px;
+   width: 180px;
+}
+#numreo-eleve{
+    height:30px;
+   width: 180px;
+}
+#index{
+
+    
+    background-size:cover ;
+    background-image:url("image/prof.jpeg") ;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.tableau-style1{
+border-collapse: collapse;
+min-width: 10px;
+width: auto;
+box:  10px;
+cursor: pointer;
+margin: 20px auto;
+border: 5px solid red ;
+background-size: cover;
+}
+th,td{
+    padding: 20px 20px;
+    background-size: auto;
+    background-color: khaki;
+}
+thead ,td{
+
+background-color: white;
+color: black;
+text-align: right;
+background-size: cover;
+}
