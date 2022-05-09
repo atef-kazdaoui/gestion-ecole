@@ -7,7 +7,8 @@ if ($_SESSION['admin'] == "") {
     header('Location: http://localhost/Gestiondenotesdansuneécole/administrateur.php');
 } else {
     $db = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', '');
-    $req = "SELECT idetudiant,nom,prenom,adresse,email FROM `etudiant`  ";
+    $req = "SELECT enseignant.idenseignant,enseignant.nom,enseignant.prenom,enseignant.email,matiere.libelle FROM enseignant,matiere WHERE 
+    enseignant.idenseignant=matiere.idenseignant; ";
     $result = $db->query($req);
 
 
@@ -49,13 +50,12 @@ if ($_SESSION['admin'] == "") {
 
 
             <thead>
-                <th> id: </th>
+                <th> idenseignant: </th>
                 <th> nom: </th>
                 <th> prenom: </th>
-                <th> adresse:</th>
                 <th> email:</th>
-                <th> modifier: </th>
-                <th> supprimer: </th>
+                <th> matiere:</th>
+                
             </thead>
 
             <?php
@@ -68,19 +68,12 @@ if ($_SESSION['admin'] == "") {
 
 
                     <tr>
-                    <td> <?php echo $row['idetudiant']; ?> </td>
+                    <td> <?php echo $row['idenseignant']; ?> </td>
                         <td> <?php echo $row['nom']; ?> </td>
                         <td> <?php echo $row['prenom']; ?> </td>
-                        <td> <?php echo $row['adresse']; ?> </td>
                         <td> <?php echo $row['email']; ?> </td>
-                        <td> <a href="modifieradmin.php?idetudiant=<?php echo $row['idetudiant']; ?>">
-                                <input nom="submit" type="button" value="modifier"></input></a> </td>
-
-                        <td>
-                            <a href="fctsupprimer.php?idetudiant=<?php echo $row['idetudiant']; ?>">
-                                <input nom="submit" type="button" value="supprimer"></input></a>
-
-                        </td>
+                        <td> <?php echo $row['libelle']; ?> </td>
+                        
 
                     </tr>
 
@@ -110,8 +103,8 @@ if ($_SESSION['admin'] == "") {
 
         </table>
 
-        <h2> <a href="ajoutereleve.php">ajouter eleve </a> </h2>
-        <h2> <a href="listeprof.php">liste des professeurs  </a> </h2>
+        <h2> <a href="affichageadmin.php">retourner </a> </h2>
+        
         <form method="POST" action="deconnexion.php">
             <button name="submit" id="button">deconnexion </button>
 

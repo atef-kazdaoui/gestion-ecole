@@ -1,29 +1,40 @@
 <?php
 session_start();
-if(isset($_POST['submit'])){
-$numero=$_POST['numero'];
+
+$email=$_POST['email'];
 $password=$_POST['password'];
-
-$db = new PDO('mysql:host=localhost; dbname=loginsystem', 'root', '');
-$sql="SELECT * FROM `prof` WHERE numero = '$numero' AND password='$password'";
-$result=  $db->prepare($sql);
-
+ 
+echo $email;
+echo $password;
+$db = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', '');
+$sql="SELECT * FROM enseignant  WHERE `email` = '$email' AND `password`='$password'";
+$result= $db->prepare($sql);
 $result->execute();
+
+ 
 if ($result->rowcount() > 0 ){
     
-    $_SESSION['prof']=$numero;
     
+    
+    foreach ($result as $row) {
+$_SESSION['enseignant']=$row['idenseignant'];
+
+
+
+    }
+    echo "aaaa";
     header('Location: http://localhost/Gestiondenotesdansuneécole/affichageprof.php');
+  
  
 
 }else {
-  
-   echo " password incorrect";
+   echo " password incorrect ou numero incorrect ";
    ?>
-   <h2> <li> <a href="professeur.php"> retourner a la page d'acceuil </a><br></li></h2>
- 
- 
- <?php
+  
+
+
+<?php
+  
 }
 
 
@@ -31,6 +42,6 @@ if ($result->rowcount() > 0 ){
 
 
 
-}
+
 
 ?>

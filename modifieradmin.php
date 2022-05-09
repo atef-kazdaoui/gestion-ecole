@@ -13,31 +13,26 @@
 <?php
 include_once "cnx.php";
 $db = config::getConnexion();
-$ID=$_GET['ID'];
-$sql='SELECT * FROM eleve WHERE ID='.$ID.'';
+$ID=$_GET['idetudiant'];
+$sql='SELECT idetudiant,nom,prenom,adresse,email FROM `etudiant` WHERE  idetudiant='.$ID.' ; ';
 $list=$db->query($sql);
 
 
-?>
-
-<?php
 foreach ($list as $eleve){
     
 
 ?>
 <form method="POST" action="fctmodifieradmin.php">
 
-        <input type="hidden" name="ID" value=<?php echo $eleve['ID'] ?> >
+        <input type="hidden" name="ID" value=<?php echo $eleve['idetudiant'] ?> >
 
-        
+       
         <h4 style="color: tomato;"> nom</h4> <input type="text" name="nom" value=<?php echo $eleve['nom']?> id="nouveau-nom"><br>
         <h4 style="color: tomato;"> prenom</h4> <input type="text" name="prenom" value=<?php echo $eleve['prenom']?> id="nouveau-prenom"><br>
         <h4 style="color: tomato;"> adresse</h4> <input type="text" name="adresse" value=<?php echo $eleve['adresse']?> id="nouveau-adresse"><br>
-        <h4 style="color: tomato;"> note mathematique</h4> <input type="number" name="note_math" value=<?php echo $eleve['note_math']?> id="nouveau-note-math"><br>
-        <h4 style="color: tomato;"> note physique</h4> <input type="number" name="note_phy" value=<?php echo $eleve['note_phy']?> id="nouveau-note-phy"><br>
-        <h4 style="color: tomato;"> note anglais</h4> <input type="number" name="note_ang" value=<?php echo $eleve['note_ang']?> id="nouveau-note-ang"><br>
-        <h4 style="color: tomato;"> note sport</h4> <input type="number" name="note_sport" value=<?php echo $eleve['note_sport']?> id="nouveau-note-sport"><br>
-        <input type="submit" name="submit" value="modifier ">
+        <h4 style="color: tomato;"> email</h4> <input type="text" name="email" value=<?php echo $eleve['email']?> id="nouveau-email"><br>
+        
+        <input type="submit" name="submit" value="modifier">
 
     </form>
 <?php }?>

@@ -1,3 +1,7 @@
+
+
+
+}
 h1{
     font-family: Helvetica, Arial, sans-serif;
     font-size: 50px;
@@ -89,6 +93,7 @@ border: 5px solid red ;
 background-size: cover;
 }
 th,td{
+    
     padding: 20px 20px;
     background-size: auto;
     background-color: khaki;

@@ -14,7 +14,7 @@
             <h2 style="color: brown;">email administrateur : </h2> <input type="text" name="emailadministrateur" placeholder="votre email " id="email-administrateur">
             <h2 style="color: brown;">mot de passe : </h2> <input type="password" name="password" placeholder="mot de passe " id="password-administrateur">
             <br><br><br>
-            <button type="submit" id="button" >connexion </button>
+            <button type="submit" id="button" onclick="control1()" >connexion </button>
             <br><br><br>
             <h2> <li> <a href="index.php"> retourner a la page d'acceuil </a><br></li></h2>
 

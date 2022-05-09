@@ -13,10 +13,10 @@
 <h2 style="color:gold;">veuillez vous connecter s'il vous plait </h2>
 
 <form class="connexion-professeur2" method="POST" action="loginprof.php">
-<h2 style="color: brown;">numero professeur : </h2>  <input type="text" name="numero" placeholder="votre numero " id="numero">
-<h2 style="color: brown;" >mot de passe : </h2>  <input type="password" name="password" placeholder="mot de passe " id="password">
+<h2 style="color: brown;" >email : </h2>  <input type="varchar" name="email" placeholder="email " id="email-professeur">
+<h2 style="color: brown;" >mot de passe : </h2>  <input type="password" name="password" placeholder="mot de passe " id="password-professeur">
 <br><br><br>
-<button id="button" name="submit" onclick="b2()">connexion</button>
+<button id="button" name="submit" onclick="control2()">connexion</button>
 <h2> <li> <a href="index.php"> retourner a la page d'acceuil </a><br></li></h2>
 
 

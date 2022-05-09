@@ -2,74 +2,88 @@
 
 <?php
 session_start();
-$nom=$_SESSION['eleve'];
-if ($_SESSION['eleve'] == "" ){
+
+if ($_SESSION['etudiant'] == "") {
     header('Location: http://localhost/Gestiondenotesdansuneécole/eleve.php');
-}else{
-include_once "cnx.php";
-$db = config::getConnexion();
+} else {
+
+    $db = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', '');
+    $id = $_SESSION['etudiant'];
+
+    $req = "SELECT etudiant.nom,etudiant.prenom,matiere.libelle,note.note FROM `etudiant`,`matiere`,`note`
+     WHERE etudiant.idetudiant=note.idetudiant AND matiere.idmatiere=note.idmatiere AND etudiant.idetudiant='$id'; ";
+$result = $db->query($req);
 
 
 ?>
 
-<head>
-    <div class="connexion-administrateur1">
-        <title> connexion administrateur</title>
-       <h3 style="color: red;"> bienvenue </h3>
-       <?php
-       ?>
-       <tr>
-       <td>
-       <?php
-       echo date('l j F Y, H:i');
-      ?>
-       </td>
-       
-       </tr>
-       
-       
-        <link rel="stylesheet" href="style.css">
+    <head>
+        <div class="connexion-administrateur1">
+            <title> connexion prof </title>
+            <h3 style="color: red;"> bienvenue </h3>
+            <?php
 
-        <script src="atef.js"> </script>
+            ?>
+            <tr>
+                <td>
+                    <?php
+                    echo date('l j F Y, H:i');
+                    ?>
+                </td>
+
+            </tr>
 
 
-</head>
+            <link rel="stylesheet" href="style.css">
 
-<body>
-    <br><br><br><br><br>
-    <h2 style="color: black;">
-        <li style="color:red; text-align: center;">vos cordonneés </li>
-    </h2>
+            <script src="atef.js"> </script>
 
 
-    <table class="tableau-style1">
+    </head>
 
-        <thead>
-        <th> ID: </th>
-                <th> nom: </th>
-                <th> prenom:</th>
-                <th> note mathematique:</th>
-                <th> note physique : </th>
-                <th> note anglais : </th>
-                <th> note sport : </th>
-                <th> note general : </th>               
-        </thead>
-        
-            <tbody>
+    <body>
+        <br><br><br><br><br>
+        <h2 style="color: black;">
+            <li style="color:red; text-align: center;">liste des eleves </li>
+        </h2>
 
 
+        <table class="tableau-style1">
+            <?php foreach ($result as $row) {
 
-                <tr>
-                <td> <?php echo $row['ID']; ?> </td>
+            ?>
+                <thead>
+                    <th> nom: </th>
+                    <th> prenom: </th>
+                    <th> <?php echo $row['libelle'] ?></th>
+                    
+                    
+
+
+                    
+                      
+                </thead>
+                
+
+                <tbody>
+
+
+
+                    <tr>
+
+
+
                         <td> <?php echo $row['nom']; ?> </td>
                         <td> <?php echo $row['prenom']; ?> </td>
-                        <td><?php echo $row['note_math']; ?></td>
-                        <td><?php echo $row['note_phy']; ?></td>
-                        <td><?php echo $row['note_ang']; ?></td>
-                        <td><?php echo $row['note_sport']; ?></td>
-                        <td><?php echo $tonnombre ; ?></td>
-                   
-                </tr>
+                        
+                        
+                        <td> note <?php echo $row['note']; ?> </td>
+                              
+
+
+
+                    </tr>
+                    <?php  } ?>
 
 
 
@@ -89,32 +103,27 @@ $db = config::getConnexion();
 
 
 
-            </tbody>
+
+                </tbody>
         <?php
+
+        
         }
+
         ?>
-    </table>
-   
-   
-  
-<form method="POST" action="deconnexion.php">
-<button name="submit" id="button">deconnexion </button>
+        </table>
+        <h2>
+            <li> <a href="index.php"> retourner a la page d'acceuil </a><br></li>
+        </h2>
+        <form method="POST" action="deconnexion.php">
+            <button name="submit" id="button">deconnexion </button>
 
 
 
 
 
-</form>
-
-
-
-</body>
-</div>
-
+        </form>
+    </body>
+    </div>
 
 </html>
-<?php
-
-
-}
-?>

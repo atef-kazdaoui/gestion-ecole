@@ -2,12 +2,11 @@
 include_once "cnx.php";
 $db = config::getConnexion();
 
-echo $_GET['ID'];
-$sql="DELETE FROM eleve where ID= :id";
-		$db = config::getConnexion();
-        $req=$db->prepare($sql);
-		$req->bindValue(':id',$_GET['ID']);
+$id=$_GET['idetudiant'];
+$sql=" DELETE FROM etudiant WHERE idetudiant='$id' ";
+		
 		try{
+            $req=$db->prepare($sql);
             $req->execute();
             header('Location: affichageadmin.php');
         }

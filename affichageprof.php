@@ -3,22 +3,28 @@
 <?php
 session_start();
 
-if ($_SESSION['prof'] == "") {
+if ($_SESSION['enseignant'] == "") {
     header('Location: http://localhost/Gestiondenotesdansuneécole/administrateur.php');
 } else {
 
-    include_once "cnx.php";
-    $db = config::getConnexion();
-    $req = "SELECT * FROM eleve";
+    $db = new PDO('mysql:host=localhost;dbname=loginsystem', 'root', '');
+    $id = $_SESSION['enseignant'];
+    echo $id;
+    $req = " SELECT matiere.idmatiere,etudiant.idetudiant,etudiant.nom,etudiant.prenom,matiere.libelle,note.note FROM etudiant,matiere,note,enseignant 
+    WHERE  etudiant.idetudiant=note.idetudiant AND
+    matiere.idmatiere=note.idmatiere AND enseignant.idenseignant=matiere.idenseignant AND enseignant.idenseignant='$id';";
     $result = $db->query($req);
+    
+
 
 ?>
 
     <head>
         <div class="connexion-administrateur1">
-            <title> connexion administrateur</title>
+            <title> connexion prof </title>
             <h3 style="color: red;"> bienvenue </h3>
             <?php
+
             ?>
             <tr>
                 <td>
@@ -47,20 +53,21 @@ if ($_SESSION['prof'] == "") {
         <table class="tableau-style1">
 
             <thead>
+            <th> idmatiere: </th>
                 <th> ID: </th>
                 <th> nom: </th>
-                <th> prenom:</th>
-                <th> note mathematique:</th>
-                <th> note physique : </th>
-                <th> note anglais : </th>
-                <th> note sport : </th>
+                <th> prenom: </th>
+                <th> libelle:</th>
+                <th> note: </th>
 
 
-                <th> modifier: </th>
+                <th> modifier note: </th>
 
             </thead>
             <?php
+            echo $result->rowcount();
             foreach ($result as $row) {
+                $_SESSION['enseignant']=$row['idmatiere'];
             ?>
 
                 <tbody>
@@ -68,16 +75,18 @@ if ($_SESSION['prof'] == "") {
 
 
                     <tr>
-                        <td> <?php echo $row['ID']; ?> </td>
+                    <td> <?php echo $_SESSION['enseignant']; ?> </td>
+                        <td> <?php echo $row['idetudiant']; ?> </td>
+
                         <td> <?php echo $row['nom']; ?> </td>
                         <td> <?php echo $row['prenom']; ?> </td>
-                        <td><?php echo $row['note_math']; ?></td>
-                        <td><?php echo $row['note_phy']; ?></td>
-                        <td><?php echo $row['note_ang']; ?></td>
-                        <td><?php echo $row['note_sport']; ?></td>
-                        <td> <a href="modifierprof.php?ID=<?php echo $row['ID']; ?>">
+                        <td> <?php echo $row['libelle']; ?> </td>
+                        <td><?php echo $row['note']; ?></td>
+                        <td> <a href="modifiernote.php?idetudiant=<?php echo $row['idetudiant']; ?>">
                                 <input nom="submit" type="button" value="modifier"></input></a> </td>
-                                
+
+
+
                     </tr>
 
 
